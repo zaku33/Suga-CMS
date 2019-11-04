@@ -40,7 +40,7 @@ class UserController {
         if (!user) return ErrorCode.CheckingError(404, "User not found!");
 
         var new_password = new RandExp(/[0-9]\w{6}#$/).gen();; // create new password with 6 digit
-        user.merge({ password: new_password }); // update new password 
+        user.merge({ password: new_password }); // update new password
         await user.save(); // save new password into database
 
         //sending password through email

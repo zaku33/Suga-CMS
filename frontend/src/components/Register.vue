@@ -5,7 +5,6 @@
 
       <v-text-field
         label="Username"
-        placeholder="Username"
         v-model="username"
         clearable
         :rules="[rules.required]"
@@ -14,7 +13,6 @@
 
       <v-text-field
         label="Email"
-        placeholder="Email"
         v-model="email"
         clearable
         :rules="[rules.required,rules.email]"
@@ -23,7 +21,6 @@
 
       <v-text-field
         label="Password"
-        placeholder="Password"
         type="password"
         autocomplete="new-password"
         v-model="password"
@@ -34,7 +31,6 @@
 
       <v-text-field
         label="Confirm Password"
-        placeholder="Confirm Password"
         type="password"
         autocomplete="new-password"
         v-model="confirm_password"
@@ -46,16 +42,21 @@
       <v-btn color="blue" dark class="mr-4" @click="Register" :disabled="allFieldFullFill">
         <v-icon class="mr-3">fas fa-user-plus</v-icon>Register
       </v-btn>
-      <br>
-      <br>
-      <hr>
-      <h5>Have already had account ? <a> <router-link v-bind:to="'login'">Login</router-link> </a></h5>
+      <br />
+      <br />
+      <hr />
+      <h5>
+        Have already had account ?
+        <a>
+          <router-link v-bind:to="'login'">Login</router-link>
+        </a>
+      </h5>
     </v-flex>
   </v-layout>
 </template>
 <script>
-import API from '../services/api';
-import Swal from 'sweetalert2';
+import API from "../services/api";
+import Swal from "sweetalert2";
 
 export default {
   data() {

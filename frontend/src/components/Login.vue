@@ -4,14 +4,12 @@
       <h1>Login</h1>
       <v-text-field
         label="Username"
-        placeholder="Username"
         v-model="username"
         :rules="[rules.filled]"
         required
       ></v-text-field>
       <v-text-field
         label="Password"
-        placeholder="Password"
         type="password"
         autocomplete="new-password"
         v-model="password"
@@ -51,6 +49,7 @@ export default {
       if (this.username == "" || this.password == "")
         return alert("Username & Password must not empty!");
       let response = await API.login(body);
+      console.log(response)
       if (response.data.errCode != 200)
         return Swal.fire({
           type: "error",

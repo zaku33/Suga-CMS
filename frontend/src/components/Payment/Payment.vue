@@ -1,16 +1,26 @@
 <template>
-  <v-parallax dark src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
-    <v-row align="center" justify="center">
-      <v-col class="text-center" cols="12">
-        <v-img
-          src="https://sttammanyfederalcu.org/wp-content/uploads/2018/02/visa-purchase-alerts-banner.png"
-          aspect-ratio="1.4"
-          style="max-height: 150px !important;"
-        ></v-img>
-        <hr class="hr-text" data-content="NẠP CHIP QUA THẺ CÀO" />
-      </v-col>
-    </v-row>
-  </v-parallax>
+  <!-- <v-card class="mx-auto"> -->
+  <div>
+    <v-img
+      class="white--text align-end"
+      height="200px"
+      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      
+    >
+      <!-- <v-card-title>Top 10 Australian beaches</v-card-title> -->
+    </v-img>
+    <hr class="hr-text" data-content="NẠP CHIP QUA THẺ CÀO" />
+    <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+
+    <v-card-text class="text--primary">
+      <v-subheader>Mã bí mật</v-subheader>
+      <v-text-field solo></v-text-field>
+      <v-subheader>Mã Serial</v-subheader>
+      <v-text-field solo></v-text-field>
+    </v-card-text>
+  </div>
+
+  <!-- </v-card> -->
 </template>
 <style lang="scss" scoped>
 .hr-text {
