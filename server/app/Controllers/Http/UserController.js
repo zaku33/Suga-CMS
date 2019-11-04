@@ -14,7 +14,7 @@ class UserController {
             const data = await auth.attempt(username, password);
             return ErrorCode.CheckingError(200, data);
         } catch (error) {
-            return ErrorCode.CheckingError(404, error.message)
+            return ErrorCode.CheckingError(error.errno, error.message)
         }
 
     }
@@ -28,7 +28,7 @@ class UserController {
             })
             return ErrorCode.CheckingError(200, "Register successful!")
         } catch (error) {
-            return ErrorCode.CheckingError(error.errno, "ERROR_DUPLICATE_ENTRY")
+            return ErrorCode.CheckingError(error.errno, error.message)
         }
 
     }

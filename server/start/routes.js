@@ -28,4 +28,10 @@ Route.group(()=>{
   Route.post('sub-icon','SubIconController.create').middleware('auth');
 }).prefix('system')
 
+Route.group(()=>{
+  Route.post('/providers','ProviderController.create').middleware('auth')
+  Route.get('/providers','ProviderController.index')
+  Route.get('/provider/:id','ProviderController.show')
+}).prefix('payment')
+
 
