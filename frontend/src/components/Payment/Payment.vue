@@ -2,46 +2,116 @@
   <div id="payment_layout">
     <br />
     <v-img class="white--text align-end" height="100%" src="../../assets/payment/Banner.png"></v-img>
-    <hr class="hr-text" data-content="NẠP CHIP QUA THẺ CÀO" />
+    <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="primary"
+      style="position:absolute;top: 10px; right: 0px;"
+      @click="Close"
+    >
+      <v-avatar>
+        <img src="../../assets/payment/Close.png" alt="John" />
+      </v-avatar>
+    </v-btn>
+    <v-row>
+      <v-col cols="5" sm="5" md="5">
+        <img src="../../assets/payment/Line.png" style="width:70vh" />
+      </v-col>
+
+      <v-col cols="2" sm="2" md="2">
+        <a style="color:white;width:100vh">NẠP CHIP QUA THẺ CÀO</a>
+      </v-col>
+
+      <v-col cols="5" sm="5" md="5">
+        <img
+          src="../../assets/payment/Line.png"
+          style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width:70vh"
+        />
+      </v-col>
+    </v-row>
     <v-card-text class="text--primary">
       <v-container>
         <v-row no-gutters>
-          <v-col cols="6" sm="6" md="6">
+          <v-col cols="5" sm="5" md="5">
+            <!-- <v-select
+            :items="(providers_real.length >0) ? providers_real: providers"/>-->
             <v-select
-              :items="all_providers"
+              :items="providers"
               label="Provider"
               v-model="provider_selected"
+              item-text="provider_name"
+              item-value="value"
               dense
               solo
             ></v-select>
-            <v-select :items="all_providers" label="Amount" v-model="amount_selected" dense solo></v-select>
-            <v-text-field dense label="Card Pin" solo></v-text-field>
-            <v-text-field dense label="Card Serial" solo></v-text-field>
-          </v-col>
-          <v-col cols="6" sm="6" md="6"></v-col>
-        </v-row>
-
-        <!-- <v-row no-gutters>
-          <v-col cols="6" md="4">
-            <v-subheader>
-              <h2 style="color:white">Loại thẻ</h2>
-            </v-subheader>
-          </v-col>
-          <v-col cols="12" sm="6" md="8">
-            <v-row class="mb-6">
-              <v-col
-                v-for="logo in logo_payments"
-                :key="logo.id"
-                :class="(12%logo_payments.length === 0) ? `col-md-${12/logo_payments.length} md-${12/logo_payments.length}`:'col-md-2 md-2'"
-                cols="12"
-              >
-                <a v-bind:href="logo.refTo">
-                  <img v-bind:src="require(`../../assets/payment/${logo.url}`)" />
-                </a>
+            <v-select
+              :items="showSelect.data"
+              item-text="money"
+              item-value="money"
+              label="Amount"
+              v-model="money_select"
+              dense
+              solo
+            ></v-select>
+            <v-text-field dense label="Card Pin" solo v-model="card_pin"></v-text-field>
+            <v-text-field dense label="Card Serial" solo v-model="card_serial"></v-text-field>
+            <v-row no-gutters>
+              <v-col cols="5" sm="5" md="5">
+                <v-text-field dense label="Capcha" solo></v-text-field>
+              </v-col>
+              <v-col cols="2" sm="2" md="2"></v-col>
+              <v-col cols="5" sm="5" md="5">
+                <my-captcha
+                  :callSuccess="captchaOk"
+                  color="orange"
+                  resolve="digit"
+                  style="background-color:white;background-size: contain"
+                ></my-captcha>
+              </v-col>
+            </v-row>
+            <br />
+            <!-- Button -->
+            <v-row no-gutters>
+              <v-col cols="6" sm="6" md="6">
+                <button id="btnPaid" @click="PaidMoney">
+                  <h1 style="color:white">Nạp tiền</h1>
+                </button>
+              </v-col>
+              <v-col cols="6" sm="6" md="6">
+                <button id="btnReInput" @click="Clear">
+                  <h1 style="color:white">Nhập lại</h1>
+                </button>
               </v-col>
             </v-row>
           </v-col>
-        </v-row>-->
+          <v-col cols="1" sm="1" md="1"></v-col>
+          <v-col cols="6" sm="6" md="6">
+            <table class="table table-striped table-bordered table-light">
+              <thead class="tableHeader">
+                <tr>
+                  <th scope="col">
+                    <h2 style="color:white">Purchase</h2>
+                  </th>
+                  <th scope="col">
+                    <h2 style="color:white">Poker Chips</h2>
+                  </th>
+                  <th scope="col">
+                    <h2 style="color:white">Bonus</h2>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="result in showSelect.data" :key="result.id">
+                  <td>{{result.money}}</td>
+                  <td>{{result.chip}}</td>
+                  <td>{{result.bonus}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </v-col>
+        </v-row>
         <br />
       </v-container>
     </v-card-text>
@@ -51,86 +121,62 @@
 </template>
 <script>
 import APIServices from "../../services/api";
+import myCaptcha from "vue-captcha";
+
 export default {
   data() {
     return {
-      provider_selected: "",
-      providers: [],
-      // @example: provider_selected: "VIETTEL",
-      // @example: providers: ["VIETTEL", "MOBIFONE", "VINAPHONE", "GATE"],
-
-      amount_selected: "",
-      amounts: [],
-      // @example: amount_selected: "10.000 VND",
-      // @example: amounts: ['10.000 VND','20.000 VND','50.000 VND','100.000 VND'],
-      all_providers: []
-      /* @example : all_providers : [
-        {
-          provider_name : 'Viettel',
-          amount_money : [10,20,50,100,200,500],
-          bonus: [1,2,5,10,20,50]
-        },{
-          provider_name : 'Mobifone',
-          amount_money : [10,20,30,50,100,200],
-          bonus: [1,2,3,5,10,20]
-        },{
-          provider_name : 'Vinaphone',
-          amount_money : [20,30,50,100,200,500],
-          bonus: [2,3,5,10,20,50]
-        }
-      ] */
+      provider_selected: [],
+      providers: window.payment,
+      money_select: "",
+      card_pin: "",
+      card_serial: ""
     };
   },
-  mounted() {
-    this.getProviderList();
+  components: { "my-captcha": myCaptcha },
+
+  computed: {
+    showSelect() {
+      return this.provider_selected;
+    }
   },
   methods: {
-    async getProviderList() {
-      var tableProvider = await APIServices.getProviderList();
-      tableProvider.data.forEach(element => {});
-    }
+    captchaOk() {
+      console.log("captcha ok.!");
+    },
+    Clear() {},
+    Close() {},
+    PaidMoney() {}
   }
 };
 </script>
 <style lang="scss" scoped>
+#btnPaid,
+#btnReInput {
+  width: 228px;
+  height: 92px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#btnPaid {
+  background-image: url("../../assets/payment/Paid.png");
+}
+#btnReInput {
+  background-image: url("../../assets/payment/ReInput.png");
+}
+.tableHeader {
+  background-image: url("../../assets/payment/TableBG.png");
+  background-size: cover;
+}
+#price_list_body {
+  background-color: white;
+}
 .v-select__selection {
   width: 100%;
   justify-content: center;
 }
 #payment_layout {
+  width: 100%;
   background-image: url("../../assets/payment/BG.png");
-}
-.hr-text {
-  line-height: 1em;
-  position: relative;
-  outline: 0;
-  border: 0;
-  color: black;
-  text-align: center;
-  height: 1.5em;
-  opacity: 0.5;
-  &:before {
-    content: "";
-    // use the linear-gradient for the fading effect
-    // use a solid background color for a solid bar
-    background: linear-gradient(to right, transparent, #818078, transparent);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 1px;
-  }
-  &:after {
-    content: attr(data-content);
-    position: relative;
-    display: inline-block;
-    color: black;
-
-    padding: 0 0.5em;
-    line-height: 1.5em;
-    // this is really the only tricky part, you need to specify the background color of the container element...
-    color: #818078;
-    background-color: #fcfcfa;
-  }
 }
 </style>

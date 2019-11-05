@@ -17,6 +17,27 @@
         <div v-show="showLink" key="2">User</div>
         <div v-show="showLink" key="3">Info</div>
       </transition-group>
+      <!-- <v-row no-gutters>
+          <v-col cols="6" md="4">
+            <v-subheader>
+              <h2 style="color:white">Loại thẻ</h2>
+            </v-subheader>
+          </v-col>
+          <v-col cols="12" sm="6" md="8">
+            <v-row class="mb-6">
+              <v-col
+                v-for="logo in logo_payments"
+                :key="logo.id"
+                :class="(12%logo_payments.length === 0) ? `col-md-${12/logo_payments.length} md-${12/logo_payments.length}`:'col-md-2 md-2'"
+                cols="12"
+              >
+                <a v-bind:href="logo.refTo">
+                  <img v-bind:src="require(`../../assets/payment/${logo.url}`)" />
+                </a>
+              </v-col>
+            </v-row>
+          </v-col>
+      </v-row>-->
     </div>
   </div>
 </template>

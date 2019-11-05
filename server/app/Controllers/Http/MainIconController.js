@@ -40,7 +40,6 @@ class MainIconController {
    */
   async create({ auth , request }) {
     try {
-      const user = await auth.getUser();
       const { icon, title, active } = request.all();
       const mainIcon = new MainIcon()
       mainIcon.fill({

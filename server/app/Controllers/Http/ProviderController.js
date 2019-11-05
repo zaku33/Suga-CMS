@@ -1,6 +1,7 @@
 'use strict'
 const Provider = use('App/Models/Provider');
 const ErrorCode = use('App/Services/ErrorCode');
+var Database = use('Database')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -19,9 +20,13 @@ class ProviderController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index({ request, response, view }) {
-    let providers = await Provider.all();
+  async index({ auth }) {
+
+    let providers = await Database.table('providers').groupByRaw('provider_name, bonus')
     return providers
+
+    // let providers = await Provider.all();
+    // return providers
   }
 
   /**

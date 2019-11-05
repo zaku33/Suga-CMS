@@ -17,16 +17,16 @@
 const Route = use('Route')
 // Instead of writing '/api/auth/register' , '/api/auth/login' , we can group '/api' into prefix
 Route.group(() => {
-  Route.post('auth/register', 'UserController.register');
-  Route.post('auth/login','UserController.login');
-  Route.post('auth/forgot-password','UserController.forgotpassword');
+  Route.post('auth/register', 'UserController.register')
+  Route.post('auth/login','UserController.login')
+  Route.post('auth/forgot-password','UserController.forgotpassword')
   Route.post('auth/change-password','UserController.changepassword')
 }).prefix('api')
 
 Route.group(()=>{
-  Route.post('main-icon','MainIconController.create').middleware('auth');
-  Route.post('sub-icon','SubIconController.create').middleware('auth');
-}).prefix('system')
+  Route.post('main-icon','MainIconController.create')
+  Route.post('sub-icon','SubIconController.create')
+}).prefix('system').middleware('auth','is:admninistrator')
 
 Route.group(()=>{
   Route.post('/providers','ProviderController.create').middleware('auth')
