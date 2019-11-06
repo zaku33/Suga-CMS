@@ -37,16 +37,16 @@
           <v-col cols="5" sm="5" md="5">
             <!-- <v-select
             :items="(providers_real.length >0) ? providers_real: providers"/>-->
-            <v-select
-              :items="providers"
-              label="Provider"
+            <v-autocomplete
+              :items="(providers_real.length >0) ? providers_real: providers"
+              label="Chọn nhà mạng để thanh toán"
               v-model="provider_selected"
               item-text="provider_name"
               item-value="value"
               dense
               solo
-            ></v-select>
-            <v-select
+            ></v-autocomplete>
+            <v-autocomplete
               :items="showSelect.data"
               item-text="money"
               item-value="money"
@@ -54,28 +54,24 @@
               v-model="money_select"
               dense
               solo
-            ></v-select>
+            ></v-autocomplete>
             <v-text-field dense label="Card Pin" solo v-model="card_pin"></v-text-field>
             <v-text-field dense label="Card Serial" solo v-model="card_serial"></v-text-field>
             <v-row no-gutters>
               <v-col cols="5" sm="5" md="5">
-                <v-text-field dense label="Capcha" solo></v-text-field>
+                <v-text-field dense label="Capcha" solo v-model="captchaInput"></v-text-field>
               </v-col>
               <v-col cols="2" sm="2" md="2"></v-col>
               <v-col cols="5" sm="5" md="5">
-                <my-captcha
-                  :callSuccess="captchaOk"
-                  color="orange"
-                  resolve="digit"
-                  style="background-color:white;background-size: contain"
-                ></my-captcha>
+                <v-text-field dense :label="captchaCode" solo disabled></v-text-field>
+                <!-- <input type="text" :placeholder="captchaCode" /> -->
               </v-col>
             </v-row>
             <br />
             <!-- Button -->
             <v-row no-gutters>
               <v-col cols="6" sm="6" md="6">
-                <button id="btnPaid" @click="PaidMoney">
+                <button id="btnPaid" @click="PaidMoney" v-bind:disabled="isReadySubmit">
                   <h1 style="color:white">Nạp tiền</h1>
                 </button>
               </v-col>
@@ -91,22 +87,14 @@
             <table class="table table-striped table-bordered table-light">
               <thead class="tableHeader">
                 <tr>
-                  <th scope="col">
-                    <h2 style="color:white">Purchase</h2>
-                  </th>
-                  <th scope="col">
-                    <h2 style="color:white">Poker Chips</h2>
-                  </th>
-                  <th scope="col">
-                    <h2 style="color:white">Bonus</h2>
+                  <th scope="col" v-for="title in table_header" :key="title.id">
+                    <h2 style="color:white">{{title}}</h2>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="result in showSelect.data" :key="result.id">
-                  <td>{{result.money}}</td>
-                  <td>{{result.chip}}</td>
-                  <td>{{result.bonus}}</td>
+                  <td v-for="i of result" :key="i.id">{{i}}</td>
                 </tr>
               </tbody>
             </table>
@@ -122,27 +110,40 @@
 <script>
 import APIServices from "../../services/api";
 import myCaptcha from "vue-captcha";
+import { payment_data } from '../../define/data';
 
 export default {
   data() {
     return {
+      // appName= [{a:1},{b:2}],
+      captchaInput: "",
+      captchaCode: "",
+      table_header: ["Purchase", "Poker Chips", "Bonus"],
       provider_selected: [],
-      providers: window.payment,
+      providers_real :[],
+      providers: payment_data,
       money_select: "",
       card_pin: "",
       card_serial: ""
     };
   },
   components: { "my-captcha": myCaptcha },
-
+  mounted() {
+    this.createCapcha();
+  },
   computed: {
     showSelect() {
       return this.provider_selected;
+    },
+    isReadySubmit() {
+      return this.captchaInput == this.captchaCode ? false : true;
     }
   },
   methods: {
-    captchaOk() {
-      console.log("captcha ok.!");
+    createCapcha() {
+      for(let i = 0 ; i < 6 ;i++){
+        this.captchaCode+= (Math.ceil(Math.random() * 10) - 1).toString();
+      }
     },
     Clear() {},
     Close() {},

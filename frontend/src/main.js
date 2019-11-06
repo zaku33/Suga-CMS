@@ -11,10 +11,6 @@ import VueCookies from 'vue-cookies'
 import ElementUI from 'element-ui'
 import BootstrapVue from 'bootstrap-vue'
 
-import { paymentInput } from './controller/payment'
-import { payment_data } from './define/data';
-paymentInput(payment_data)
-
 import './plugins/element.js'
 
 Vue.use(VueCookies)
