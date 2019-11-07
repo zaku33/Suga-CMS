@@ -49,12 +49,11 @@ export default {
       if (this.username == "" || this.password == "")
         return alert("Username & Password must not empty!");
       let response = await API.login(body);
-      console.log(response)
       if (response.data.errCode != 200)
         return Swal.fire({
           type: "error",
           title: "Login failed!",
-          text: "Username or password wrong!"
+          text: `${response.data.message}`
         });
 
       var _token = `${response.data.message.type} ${response.data.message.token} `; // get bearer + token

@@ -16,112 +16,81 @@
     </v-list-item>
     <v-divider></v-divider>
     <v-list>
-      <v-list-group
-        v-model="item.active"
-        v-for="item in items"
-        :key="item.title"
-        :prepend-icon="item.icon"
-        no-action
-      >
-        <v-list-item slot="activator">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item
-          v-for="subItem in item.items"
-          :key="subItem.title"
-          ripple
-          :to="subItem.linkTo"
-          exact
+      <draggable v-model="icons">
+        <v-list-group
+          v-model="item.active"
+          v-for="item in icons"
+          :key="item.title"
+          :prepend-icon="item.icon"
+          no-action
         >
-          <v-list-item-content>
-            <v-list-item-title>{{ subItem.title }}</v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-icon>
-            <v-icon v-text="subItem.icon"></v-icon>
-          </v-list-item-icon>
-        </v-list-item>
-      </v-list-group>
+          <v-list-item slot="activator">
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item
+            v-for="subItem in item.subIcon"
+            :key="subItem.title"
+            ripple
+            :to="subItem.linkTo"
+            exact
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-icon>
+              <v-icon v-text="subItem.icon"></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+      </draggable>
     </v-list>
     <v-divider></v-divider>
-    <!-- <v-list-item> -->
-      <a @click="Logout">
-        <v-icon>fas fa-sign-out-alt</v-icon>
-        <v-list-item-title style="color:white">Logout</v-list-item-title>
-      </a>
-    <!-- </v-list-item> -->
+    <v-row justify-center>
+      <v-col>
+        <a @click="Logout">
+          <v-icon>fas fa-sign-out-alt</v-icon>
+          <v-list-item-title style="color:white">Logout</v-list-item-title>
+        </a>
+      </v-col>
+      <v-col>
+        <router-link :to="{path:'/admin/dashboard/setting'}">
+          <a>
+            <v-icon>fas fa-cog</v-icon>
+            <v-list-item-title style="color:white">Setting</v-list-item-title>
+          </a>
+        </router-link>
+      </v-col>
+    </v-row>
   </v-navigation-drawer>
 </template>
 
 <script>
-import API from '../../services/api';
-import Swal from 'sweetalert2';
+import API from "../../services/api";
+import Swal from "sweetalert2";
+import draggable from "vuedraggable";
+
 const CustomeSwal = Swal.mixin({
-    customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger"
   },
   buttonsStyling: false
-})
+});
 export default {
-  beforeCreate() {
-    
+  components: {
+    draggable
+  },
+  mounted() {
+    this.getSystemButton();
   },
   data() {
     return {
       drawer: true,
       username: $cookies.get("user"),
-      items: [
-        {
-          icon: "fas fa-home",
-          title: "Home",
-          active: false
-        },
-        {
-          icon: "fas fa-chart-line",
-          title: "Chart",
-          active: false,
-          items: [
-            {
-              title: "Analytics",
-              icon: "fas fa-chart-area",
-              linkTo: "/admin/dashboard/analytics"
-            },
-            {
-              title: "Schedular",
-              icon: "fas fa-clipboard-list",
-              linkTo: "/admin/dashboard/schedular"
-            }
-          ]
-        },
-        {
-          icon: "fas fa-blog",
-          title: "Blog",
-          active: false
-        },
-        {
-          icon: "fas fa-dice-six",
-          title: "Game",
-          active: false
-        },
-        {
-          icon: "fas fa-inbox",
-          title: "Email",
-          active: false
-        },
-        {
-          icon: "fas fa-bullhorn",
-          title: "Announcement",
-          active: false
-        },
-        {
-          icon: "fas fa-ad",
-          title: "Promotions",
-          active: false
-        }
-      ]
+      icons: []
     };
   },
   methods: {
@@ -141,6 +110,10 @@ export default {
           this.$router.push({ path: "/admin/login" });
         }
       });
+    },
+    async getSystemButton() {
+      var all = await API.iconDashboard();
+      this.icons = all.data;
     }
   }
 };

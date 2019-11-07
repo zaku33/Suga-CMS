@@ -20,6 +20,8 @@ class SubIconController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
+    const sub_icon = await SubIcon.query().select(['id','icon','title','active','main_icon_id']).fetch();
+    return sub_icon
   }
 
   /**

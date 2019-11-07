@@ -8,7 +8,7 @@ class SubIcon extends Model {
     //     return this.belongsTo('App/Models/User');
     // }
     mainIcon () {
-        return this.belongsTo('App/Models/MainIcon', 'main_icon_id')
+        return this.belongsTo('App/Models/MainIcon')
       }
 }
 

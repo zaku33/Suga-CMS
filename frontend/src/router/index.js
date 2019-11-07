@@ -3,13 +3,17 @@ import VueRouter from 'vue-router'
 
 import Analytics from '../components/CMS/Analytics'
 import Schedular from '../components/CMS/Schedular'
+import Setting from '../components/CMS/Setting'
 import AdminDashboard from '../components/CMS/AdminDashboard'
 import Login from '../components/Login'
 import Register from '../components/Register'
+
+
 import Page from '../components/Page'
 import NotFound from '../components/NotFound'
 
 import Payment from '../components/Payment/Payment'
+import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
 
@@ -30,6 +34,10 @@ const routes = [
           {
             path: 'schedular',
             component: Schedular
+          },
+          {
+            path: 'setting',
+            component: Setting
           }
         ]
       },
@@ -58,12 +66,17 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  const requireLogin = ['/admin/dashboard','/admin/dashboard/analytics','/admin/dashboard/schedular'];
+  const requireLogin = ['/admin/dashboard', '/admin/dashboard/analytics', '/admin/dashboard/schedular'];
   const publicPage = !requireLogin.includes(to.path);
   const loggedIn = $cookies.get('user')
   if (!publicPage && !loggedIn) {
-    alert('Please Login first')
-    return next('/admin/login');
+    return Swal.fire({
+      type: "error",
+      title: "Access denied!",
+      text: "Please login first!"
+    }).then(() => {
+      next('/admin/login');
+    });
   }
   next();
 })

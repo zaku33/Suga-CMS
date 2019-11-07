@@ -24,14 +24,16 @@ Route.group(() => {
 }).prefix('api')
 
 Route.group(()=>{
-  Route.post('main-icon','MainIconController.create')
-  Route.post('sub-icon','SubIconController.create')
-}).prefix('system').middleware('auth','is:admninistrator')
+  Route.post('main-icon','MainIconController.create').middleware('auth')
+  Route.post('sub-icon','SubIconController.create').middleware('auth')
+  Route.get('main-icon','MainIconController.index')
+}).prefix('system')
 
-Route.group(()=>{
-  Route.post('/providers','ProviderController.create').middleware('auth')
-  Route.get('/providers','ProviderController.index')
-  Route.get('/provider/:id','ProviderController.show')
-}).prefix('payment')
+// Route.group(()=>{
+//   Route.post('/providers','ProviderController.create').middleware('auth')
+//   Route.get('/providers','ProviderController.index')
+//   Route.get('/provider/:id','ProviderController.show')
+// }).prefix('payment')
+Route.post('test','UserController.test');
 
 

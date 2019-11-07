@@ -8,6 +8,15 @@ const Mail = use('Mail');
 const Hash = use('Hash');
 
 class UserController {
+    /**
+     * 
+     * Login function
+     * @requires username and password
+     * @param {object} request adonis syntax
+     * @param {string} request.username
+     * @param {string} request.password
+     * @param {*} auth get user authentication 
+     */
     async login({ request, auth }) {
         try {
             const { username, password } = request.all();
@@ -76,6 +85,13 @@ class UserController {
         await user.save();
 
         return { message: `Change password successful!` } //then return message
+    }
+    async test({ request }){
+        var {paymentInput} = require('../../../../frontend/src/controller/payment');
+        var data = request.all();
+        var n = await paymentInput(data);
+        console.log(n)
+        return n
     }
 }
 

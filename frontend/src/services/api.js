@@ -10,6 +10,12 @@ export default {
     },
 
 
+    // Symbol
+    iconDashboard(){
+        return route().get('system/main-icon')
+    },
+
+
     // Payment
     getProviderList() {
         return route().get('/payment/providers')

@@ -2,6 +2,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bootstrap-css-only/css/bootstrap.min.css'
 import 'mdbvue/lib/css/mdb.min.css'
 import 'vuetify/dist/vuetify.min.css'
+import './plugins/element.js'
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
@@ -11,7 +12,8 @@ import VueCookies from 'vue-cookies'
 import ElementUI from 'element-ui'
 import BootstrapVue from 'bootstrap-vue'
 
-import './plugins/element.js'
+// import { paymentInput } from './controller/payment'
+// import { payment_data } from './define/data';
 
 Vue.use(VueCookies)
 Vue.use(ElementUI)

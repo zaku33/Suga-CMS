@@ -8,8 +8,8 @@ class SubIconSchema extends Schema {
     this.create('sub_icons', (table) => {
       table.increments()
       table.integer('main_icon_id').unsigned().references('id').inTable('main_icons')
-      table.string('icon', 20)
-      table.string('title', 100)
+      table.string('icon', 255)
+      table.string('title', 255)
       table.string('linkTo', 255)
       table.timestamps()
     })

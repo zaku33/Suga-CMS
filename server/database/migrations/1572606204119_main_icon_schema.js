@@ -7,8 +7,8 @@ class MainIconSchema extends Schema {
   up () {
     this.create('main_icons', (table) => {
       table.increments()
-      table.string('icon', 20)
-      table.string('title', 100)
+      table.string('icon', 255)
+      table.string('title', 255)
       table.boolean('active')
       table.timestamps()
     })
