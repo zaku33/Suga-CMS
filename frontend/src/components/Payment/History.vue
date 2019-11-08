@@ -43,7 +43,7 @@
         :mobile-breakpoint="0"
       >
         <template v-slot:body="{ items }">
-          <tbody>
+          <tbody style="overflow: auto">
             <tr v-for="item in items" :key="item.id">
               <td>{{item.date!=null ? moment(item.date).format("YYYY-MM-DD HH:mm:ss A") : null}}</td>
               <td>{{item.transactionId || null}}</td>
