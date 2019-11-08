@@ -13,6 +13,7 @@ import Page from '../components/Page'
 import NotFound from '../components/NotFound'
 
 import Payment from '../components/Payment/Payment'
+import History from '../components/Payment/History'
 import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
@@ -54,6 +55,11 @@ const routes = [
     path: '/payment',
     name: 'payment',
     component: Payment,
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: History,
   },
   {
     path: '*',

@@ -1,8 +1,9 @@
 <template>
-  <div id="payment_layout">
-    <br />
-    <v-img class="white--text align-end" height="100%" src="../../assets/payment/Banner.png"></v-img>
-    <v-btn
+  <v-app id="payment_layout">
+    <div>
+      <v-img class="white--text align-end" src="../../assets/payment/Banner.png"></v-img>
+    </div>
+    <!-- <v-btn
       class="mx-2"
       fab
       dark
@@ -14,28 +15,26 @@
       <v-avatar>
         <img src="../../assets/payment/Close.png" alt="John" />
       </v-avatar>
-    </v-btn>
-    <!-- <h5 style="color: white">{{provider_selected}}</h5> -->
-    <h1 style="color: white">{{money_select.id}} {{money_select.amount}}</h1>
-    <v-row>
+    </v-btn> -->
+    <v-row style="max-height: fit-content;">
       <v-col cols="5" sm="5" md="5">
-        <img src="../../assets/payment/Line.png" style="width:70vh" />
+        <img src="../../assets/payment/Line.png" style="width:100%;" />
       </v-col>
 
-      <v-col cols="2" sm="2" md="2">
-        <a style="color:white;width:100vh">NẠP CHIP QUA THẺ CÀO</a>
+      <v-col cols="2" sm="2" md="2" style="width:100%;text-align:center">
+        <a style="color:white">NẠP CHIP QUA THẺ CÀO</a>
       </v-col>
 
       <v-col cols="5" sm="5" md="5">
         <img
           src="../../assets/payment/Line.png"
-          style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width:70vh"
+          style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width:100%"
         />
       </v-col>
     </v-row>
     <v-card-text class="text--primary">
       <v-container>
-        <v-row no-gutters>
+        <v-row justify-center>
           <v-col cols="5" sm="5" md="5">
             <v-autocomplete
               :items="(providers_real!=undefined && providers_real.length>0) ? providers_real: providers"
@@ -62,11 +61,11 @@
             <v-text-field dense label="Card Pin" solo v-model="card_pin"></v-text-field>
             <v-text-field dense label="Card Serial" solo v-model="card_serial"></v-text-field>
             <v-row no-gutters>
-              <v-col cols="5" sm="5" md="5">
+              <v-col cols="12" sm="5" md="5" xs="5">
                 <v-text-field dense label="Capcha" solo v-model="captchaInput"></v-text-field>
               </v-col>
               <v-spacer></v-spacer>
-              <v-col cols="5" sm="5" md="5">
+              <v-col cols="12" sm="5" md="5" xs="5">
                 <v-text-field dense :label="captchaCode" solo disabled></v-text-field>
               </v-col>
             </v-row>
@@ -87,38 +86,33 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="6" sm="6" md="6">
-            <table class="table table-striped table-bordered table-light">
-              <thead class="tableHeader">
-                <tr>
-                  <th scope="col" v-for="title in table_header" :key="title.id">
-                    <h2 style="color:white">{{title}}</h2>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="result in showSelect.data" :key="result.id">
-                  <!-- <td v-for="(item,key,index) of result" :key="index.id">
-                    <div v-if="(key =='amount')? item=`${item} ${result.currency}`:item">{{item}}</div>
-                  </td>-->
-                  <td>{{result.amount}}</td>
-                  <td>{{result.id}}</td>
-                  <td>{{result.currency}}</td>
-                </tr>
-              </tbody>
-            </table>
+            <v-data-table
+              :headers="table_header"
+              :items="showSelect.data"
+              hide-default-footer
+              class="elevation-1"
+              :mobile-breakpoint="0"
+            >
+              <template v-slot:body="{ items }">
+                <tbody>
+                  <tr v-for="item in items" :key="item.id">
+                    <td>{{Number(item.amount.toFixed(1)).toLocaleString() }} {{item.currency}}</td>
+                    <td>{{Number(item.chips.toFixed(1)).toLocaleString()}} Chips</td>
+                    <td>{{Number(item.bonusChips.toFixed(1)).toLocaleString()}} Chips</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-data-table>
           </v-col>
         </v-row>
         <br />
       </v-container>
     </v-card-text>
-    <br />
-    <br />
-
-  </div>
+  </v-app>
 </template>
 <script>
 import _ from "lodash";
-import { payment_data } from "../../define/data";
+import { payment_data, token } from "../../define/data";
 import PaymentControl from "../../controller/payment";
 
 export default {
@@ -126,7 +120,29 @@ export default {
     return {
       captchaInput: "",
       captchaCode: "",
-      table_header: ["Purchase", "Poker Chips", "Bonus"],
+      table_header: [
+        {
+          text: "Purchase",
+          // width: 100,
+          align: "left",
+          sortable: false,
+          value: "amount"
+        },
+        {
+          text: "Chips",
+          // width: 100,
+          align: "left",
+          sortable: false,
+          value: "chips"
+        },
+        {
+          text: "Bonus",
+          // width: 100,
+          align: "left",
+          sortable: false,
+          value: "bonusChips"
+        }
+      ],
       provider_selected: [],
       providers_real: [],
       providers: payment_data,
@@ -141,16 +157,6 @@ export default {
     this.GetPriceList();
   },
   computed: {
-    // old data
-    /*     getProviderId() {
-      return this.provider_selected.telco;
-    },
-    getOnlyNumberMoney() {
-      return this.money_select.replace(/[^\d\.\,\s]+/g, "").replace(/\./g, "");
-    },
-    getOnlyCurrency() {
-      return this.money_select.replace(/[^0-9.-]+/g, "");
-    }, */
     showSelect() {
       return this.provider_selected;
     },
@@ -160,20 +166,23 @@ export default {
   },
   methods: {
     async GetPriceList() {
+      let method = "get";
       let url = "https://payment.aceplayx.com/api/payment/stores/products";
-      let payMethod = "CARD";
-      let x = await PaymentControl.ListPrice(url, payMethod).then(result => {
+      let header = { payMethod: "CARD", authorization: token };
+      await PaymentControl.PaymentAPI(method, url, header).then(result => {
         var data = result.data.data;
         var y = _.chain(data.products)
           .groupBy("serviceName")
           .map(function(v, i) {
             var name =
               i == "VTT"
-                ? "Viettel"
+                ? "VIETTEL"
                 : i == "VMS"
-                ? "Mobifone"
+                ? "MOBIFONE"
                 : i == "VNP"
-                ? "Vinaphone"
+                ? "VINAPHONE"
+                : i == "MOMO"
+                ? "MOMO"
                 : "Unknown";
             return {
               provider_name: name,
@@ -188,7 +197,7 @@ export default {
     },
     Paid() {
       let data = {
-        token: "e2075474294983e013ee4dd2201c7a73", // get user's login token ( wait Sang support)
+        authorization: token, // get user's login token ( wait Sang support)
         method: "CARD",
         serial: this.card_serial,
         pin: this.card_pin,
@@ -197,8 +206,11 @@ export default {
         /* telco: this.getProviderId,
         value: this.getOnlyNumberMoney */
       };
+      let header = {
+        authorization: token
+      };
       let url = "https://payment.aceplayx.com/api/payment/deposit";
-      PaymentControl.PayingRequest(url, data);
+      PaymentControl.PayingRequest("post", url, data, header);
     },
     Reset() {
       this.captchaInput = "";
@@ -218,7 +230,11 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+th.text-left span {
+  color: white;
+  font-size: 150%;
+}
 #txtPaid,
 #txtReInput {
   color: white;
@@ -250,6 +266,9 @@ export default {
 }
 #payment_layout {
   width: 100%;
+  height: 100%;
   background-image: url("../../assets/payment/BG.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

@@ -3,31 +3,31 @@ var axios = require('axios');
 
 module.exports = {
     /**
-     * This function is using for input data directly
-     * @param {string} provider_name provider name
-     * @example
-     * data_array = [{
-     *      provider_name: "Viettel",
-     *      value: {
-     *          data: [{ 
-     *              money: "1.000 VND", 
-     *              chip:"100.000 Chips",
-     *              bonus:"1%"}]
-     *      }
-     * }]    
+     * 
+     * @param {string} method Axios method , see more at https://github.com/axios/axios
+     * @param {string} url server url
+     * @param {*} header for adding token
+     * @param {*} param for adding params , sort , filter or paginate
+     * @param {*} data for request data to server
      */
-    PaymentInput(list_input) {
-        return list_input
+    PaymentAPI(method, url, header, param, data) {
+        return axios({
+            method: method,
+            url: url,
+            headers: header,
+            params: param,
+            data: data
+        }).then(result => {
+            return result
+        })
     },
 
-    ListPrice(url, params) {
-        return axios({ method: 'get', url: url ,params: params})
-            .then(result => {
-                return result
-            })
-    },
-
-    PayingRequest(url, data) {
+    /**
+     * 
+     * @param {*} url server url
+     * @param {*} data for request data to server
+     */
+    PayingRequest(method,url, data,header) {
         Swal.fire({
             title: "Processing",
             text: "Please wait",
@@ -39,9 +39,10 @@ module.exports = {
             }
         })
         axios({
-            method: 'post',
+            method: method,
             url: url,
-            data: data
+            data: data,
+            headers:header
         }).then(result => {
             if (result.data.code != 1000) {
                 Swal.fire({
@@ -61,6 +62,7 @@ module.exports = {
             }
         })
 
-    }
+    },
+
 
 }
