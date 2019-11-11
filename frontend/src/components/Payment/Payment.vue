@@ -1,21 +1,6 @@
 <template>
-  <v-app id="payment_layout">
-    <div>
-      <v-img class="white--text align-end" src="../../assets/payment/Banner.png"></v-img>
-    </div>
-    <!-- <v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="primary"
-      style="position:absolute;top: 10px; right: 0px;"
-      @click="Close"
-    >
-      <v-avatar>
-        <img src="../../assets/payment/Close.png" alt="John" />
-      </v-avatar>
-    </v-btn> -->
+  <v-app id="payment_layout" class="clearfix">
+    <img src="../../assets/payment/Banner.png" id="banner" />
     <v-row style="max-height: fit-content;">
       <v-col cols="5" sm="5" md="5">
         <img src="../../assets/payment/Line.png" style="width:100%;" />
@@ -32,9 +17,11 @@
         />
       </v-col>
     </v-row>
-    <v-card-text class="text--primary">
+
+    <v-content>
       <v-container>
         <v-row justify-center>
+          <!-- INPUT FIELD -->
           <v-col cols="5" sm="5" md="5">
             <v-autocomplete
               :items="(providers_real!=undefined && providers_real.length>0) ? providers_real: providers"
@@ -47,7 +34,6 @@
               menu-props="auto"
             ></v-autocomplete>
 
-            <!-- return-object for return selection in object type -->
             <v-autocomplete
               :items="showSelect.data"
               return-object
@@ -58,6 +44,7 @@
               dense
               solo
             ></v-autocomplete>
+
             <v-text-field dense label="Card Pin" solo v-model="card_pin"></v-text-field>
             <v-text-field dense label="Card Serial" solo v-model="card_serial"></v-text-field>
             <v-row no-gutters>
@@ -70,44 +57,61 @@
               </v-col>
             </v-row>
             <br />
+
+            <!-- BUTTON -->
             <v-row justify-center>
-              <v-col cols="5" sm="5" md="5">
+              <v-col cols="12" sm="5" md="5" lg="5" xl="5">
                 <button id="btnPaid" @click="Paid" v-bind:disabled="isReadySubmit">
                   <h5 id="txtPaid">Nạp tiền</h5>
                 </button>
               </v-col>
               <v-spacer></v-spacer>
-              <v-col cols="5" sm="5" md="5">
+              <v-col cols="12" sm="5" md="5" lg="5" xl="5">
                 <button id="btnReInput" @click="Reset">
                   <h5 id="txtReInput">Nhập lại</h5>
                 </button>
               </v-col>
             </v-row>
           </v-col>
+
           <v-spacer></v-spacer>
+
+          <!-- TABLE -->
+
           <v-col cols="6" sm="6" md="6">
-            <v-data-table
-              :headers="table_header"
-              :items="showSelect.data"
-              hide-default-footer
-              class="elevation-1"
-              :mobile-breakpoint="0"
-            >
-              <template v-slot:body="{ items }">
-                <tbody>
-                  <tr v-for="item in items" :key="item.id">
-                    <td>{{Number(item.amount.toFixed(1)).toLocaleString() }} {{item.currency}}</td>
-                    <td>{{Number(item.chips.toFixed(1)).toLocaleString()}} Chips</td>
-                    <td>{{Number(item.bonusChips.toFixed(1)).toLocaleString()}} Chips</td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-data-table>
+            <v-container>
+              <v-card>
+                <v-data-table
+                  :headers="table_header"
+                  :items="showSelect.data"
+                  hide-default-footer
+                  class="dataTable elevation-1"
+                  :mobile-breakpoint="0"
+                >
+                  <template v-slot:headers="{headers}">
+                    <thead>
+                      <tr v-for="head in headers" :key="head.id">
+                        <th>{{head}} abc</th>
+                      </tr>
+                    </thead>
+                  </template>
+                  
+                  <template v-slot:body="{ items }">
+                    <tbody>
+                      <tr v-for="item in items" :key="item.id">
+                        <td>{{Number(item.amount.toFixed(1)).toLocaleString() }} {{item.currency}}</td>
+                        <td>{{Number(item.chips.toFixed(1)).toLocaleString()}} Chips</td>
+                        <td>{{Number(item.bonusChips.toFixed(1)).toLocaleString()}} Chips</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-container>
           </v-col>
         </v-row>
-        <br />
       </v-container>
-    </v-card-text>
+    </v-content>
   </v-app>
 </template>
 <script>
@@ -123,24 +127,24 @@ export default {
       table_header: [
         {
           text: "Purchase",
-          // width: 100,
           align: "left",
           sortable: false,
-          value: "amount"
+          value: "amount",
+          fixed: true
         },
         {
           text: "Chips",
-          // width: 100,
           align: "left",
           sortable: false,
-          value: "chips"
+          value: "chips",
+          fixed: true
         },
         {
           text: "Bonus",
-          // width: 100,
           align: "left",
           sortable: false,
-          value: "bonusChips"
+          value: "bonusChips",
+          fixed: true
         }
       ],
       provider_selected: [],
@@ -202,9 +206,6 @@ export default {
         serial: this.card_serial,
         pin: this.card_pin,
         productId: this.money_select.id
-        // old data
-        /* telco: this.getProviderId,
-        value: this.getOnlyNumberMoney */
       };
       let header = {
         authorization: token
@@ -231,9 +232,11 @@ export default {
 };
 </script>
 <style lang="scss">
-th.text-left span {
-  color: white;
-  font-size: 150%;
+#banner {
+  width: 100%;
+}
+#inputValueField {
+  position: fixed;
 }
 #txtPaid,
 #txtReInput {
@@ -244,8 +247,13 @@ th.text-left span {
 #btnReInput {
   width: 100%;
   height: 92px;
+  max-height: fit-content;
   background-repeat: no-repeat;
   background-size: contain;
+  text-align: center;
+  display: inline-block;
+  // background-attachment: fixed;
+  background-position: center;
 }
 #btnPaid {
   background-image: url("../../assets/payment/Paid.png");
@@ -253,17 +261,11 @@ th.text-left span {
 #btnReInput {
   background-image: url("../../assets/payment/ReInput.png");
 }
-.tableHeader {
-  background-image: url("../../assets/payment/TableBG.png");
-  background-size: cover;
+thead.v-data-table-header {
+  background-color: lightgoldenrodyellow;
+  border-bottom: none;
 }
-#price_list_body {
-  background-color: white;
-}
-.v-select__selection {
-  width: 100%;
-  justify-content: center;
-}
+
 #payment_layout {
   width: 100%;
   height: 100%;

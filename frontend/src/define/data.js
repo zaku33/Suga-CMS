@@ -5,13 +5,13 @@ module.exports = {
             value: {
                 telco: "VTT",
                 data: [
-                    { amount: "10.000 VND", chips: "100.000 chips", bonusChips: "1%" },
-                    { amount: "20.000 VND", chips: "200.000 chips", bonusChips: "2%" },
-                    { amount: "30.000 VND", chips: "300.000 chips", bonusChips: "3%" },
-                    { amount: "50.000 VND", chips: "500.000 chips", bonusChips: "5%" },
-                    { amount: "100.000 VND", chips: "1.000.000 chips", bonusChips: "10%" },
-                    { amount: "200.000 VND", chips: "2.000.000 chips", bonusChips: "20%" },
-                    { amount: "500.000 VND", chips: "5.000.000 chips", bonusChips: "50%" }
+                    { amount: 10000, chips: 100000, bonusChips: 100000 },
+                    { amount: 20000, chips: 200000, bonusChips: 200000 },
+                    { amount: 30000, chips: 300000, bonusChips: 300000 },
+                    { amount: 50000, chips: 500000, bonusChips: 500000 },
+                    { amount: 100000, chips: 1000000, bonusChips: 1000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 500000, chips: 5000000, bonusChips: 5000000 }
                 ]
             }
         },
@@ -20,30 +20,13 @@ module.exports = {
             value: {
                 telco: "VMS",
                 data: [
-                    { amount: "10.000 VND", chips: "500.000 chips", bonusChips: "0%" },
-                    { amount: "20.000 VND", chips: "1.200.000 chips", bonusChips: "+20%" },
-                    { amount: "30.000 VND", chips: "2.250.000 chips", bonusChips: "+50%" },
-                    { amount: "50.000 VND", chips: "5.000.000 chips", bonusChips: "+100%" },
-                    {
-                        amount: "100.000 VND",
-                        chips: "14.000.000 chips",
-                        bonusChips: "+180%"
-                    },
-                    {
-                        amount: "200.000 VND",
-                        chips: "45.000.000 chips",
-                        bonusChips: "+350%"
-                    },
-                    {
-                        amount: "300.000 VND",
-                        chips: "97.000.000 chips",
-                        bonusChips: "+550%"
-                    },
-                    {
-                        amount: "500.000 VND",
-                        chips: "200.000.000 chips",
-                        bonusChips: "+700%"
-                    }
+                    { amount: 10000, chips: 100000, bonusChips: 100000 },
+                    { amount: 20000, chips: 200000, bonusChips: 200000 },
+                    { amount: 30000, chips: 300000, bonusChips: 300000 },
+                    { amount: 50000, chips: 500000, bonusChips: 500000 },
+                    { amount: 100000, chips: 1000000, bonusChips: 1000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 500000, chips: 5000000, bonusChips: 5000000 }
                 ]
             }
         },
@@ -52,30 +35,27 @@ module.exports = {
             value: {
                 telco: "VNP",
                 data: [
-                    { amount: "10.000 VND", chips: "500.000 chips", bonusChips: "0%" },
-                    { amount: "20.000 VND", chips: "1.200.000 chips", bonusChips: "+20%" },
-                    { amount: "30.000 VND", chips: "2.250.000 chips", bonusChips: "+50%" },
-                    { amount: "50.000 VND", chips: "5.000.000 chips", bonusChips: "+100%" },
-                    {
-                        amount: "100.000 VND",
-                        chips: "14.000.000 chips",
-                        bonusChips: "+180%"
-                    },
-                    {
-                        amount: "200.000 VND",
-                        chips: "45.000.000 chips",
-                        bonusChips: "+350%"
-                    },
-                    {
-                        amount: "300.000 VND",
-                        chips: "97.000.000 chips",
-                        bonusChips: "+550%"
-                    },
-                    {
-                        amount: "500.000 VND",
-                        chips: "200.000.000 chips",
-                        bonusChips: "+700%"
-                    }
+                    { amount: 10000, chips: 100000, bonusChips: 100000 },
+                    { amount: 20000, chips: 200000, bonusChips: 200000 },
+                    { amount: 30000, chips: 300000, bonusChips: 300000 },
+                    { amount: 50000, chips: 500000, bonusChips: 500000 },
+                    { amount: 100000, chips: 1000000, bonusChips: 1000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 500000, chips: 5000000, bonusChips: 5000000 },
+
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 555555, chips: 555555, bonusChips: 555555 },
+
                 ]
             }
         },
@@ -84,37 +64,20 @@ module.exports = {
             value: {
                 telco: "GATE",
                 data: [
-                    { amount: "10.000 VND", chips: "500.000 chips", bonusChips: "0%" },
-                    { amount: "20.000 VND", chips: "1.200.000 chips", bonusChips: "+20%" },
-                    { amount: "30.000 VND", chips: "2.250.000 chips", bonusChips: "+50%" },
-                    { amount: "50.000 VND", chips: "5.000.000 chips", bonusChips: "+100%" },
-                    {
-                        amount: "100.000 VND",
-                        chips: "14.000.000 chips",
-                        bonusChips: "+180%"
-                    },
-                    {
-                        amount: "200.000 VND",
-                        chips: "45.000.000 chips",
-                        bonusChips: "+350%"
-                    },
-                    {
-                        amount: "300.000 VND",
-                        chips: "97.000.000 chips",
-                        bonusChips: "+550%"
-                    },
-                    {
-                        amount: "500.000 VND",
-                        chips: "200.000.000 chips",
-                        bonusChips: "+700%"
-                    }
+                    { amount: 10000, chips: 100000, bonusChips: 100000 },
+                    { amount: 20000, chips: 200000, bonusChips: 200000 },
+                    { amount: 30000, chips: 300000, bonusChips: 300000 },
+                    { amount: 50000, chips: 500000, bonusChips: 500000 },
+                    { amount: 100000, chips: 1000000, bonusChips: 1000000 },
+                    { amount: 200000, chips: 2000000, bonusChips: 2000000 },
+                    { amount: 500000, chips: 5000000, bonusChips: 5000000 }
                 ]
             }
         },
     ],
     history_data: [
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -122,7 +85,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -130,7 +93,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -138,7 +101,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -146,7 +109,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -154,7 +117,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -162,7 +125,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -170,7 +133,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -178,7 +141,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -186,7 +149,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -194,7 +157,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -202,7 +165,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -210,7 +173,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -218,7 +181,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -226,7 +189,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -234,7 +197,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -242,7 +205,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -250,7 +213,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -258,7 +221,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -266,7 +229,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -274,7 +237,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -282,7 +245,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -290,7 +253,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -298,7 +261,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Frozen Yogurt",
+            name: "VTT",
             calories: 159,
             fat: 6.0,
             carbs: 24,
@@ -306,7 +269,7 @@ module.exports = {
             iron: "1%"
         },
         {
-            name: "Ice cream sandwich",
+            name: "VMS",
             calories: 237,
             fat: 9.0,
             carbs: 37,
@@ -378,10 +341,5 @@ module.exports = {
             iron: "6%"
         }
     ],
-    imgDefine: {
-        imageCode: 'VTT',
-        linkImage: "../../assets/history/Viettel.png"
-    },
-
     token: "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlZWRhZTEzN2ZkYmNiM2MxZTRhMzEwMzA0MDlhZmM1M2M3MTE1OTAxMTZmYzczMTJmNWIzYTk3NDZhODkxYTQzYjQwOTFkODA4ZjY2MGQyIn0.eyJhdWQiOiIxIiwianRpIjoiZGVlZGFlMTM3ZmRiY2IzYzFlNGEzMTAzMDQwOWFmYzUzYzcxMTU5MDExNmZjNzMxMmY1YjNhOTc0NmE4OTFhNDNiNDA5MWQ4MDhmNjYwZDIiLCJpYXQiOjE1NjEzNzI5NzIsIm5iZiI6MTU2MTM3Mjk3MiwiZXhwIjoxNTYyNjY4OTcyLCJzdWIiOiIxMjgxIiwic2NvcGVzIjpbIioiXX0.lqEvSNdPUQJxtvMto62Gxg3a-mQd7ZDQ-4FB6BwPocHRVg883hz8XQGoxCArpfpJc7fC0ZcIsQ0EblLtml1gEJaClvblss_i5FcAtAxJYzn30jBlLTN3BffHr4ZZIYWnn1Km952hXPO4GsJRAtfvVsKhLCGeKioF5R0wQcZMWQcOyIJdoBsZT4c3bNggrb0BTu4LxXJsRa1HcIWUEkKGqXFybJ2KoBvaEv46lLWokRez8ZBqQUJnw6R7ooHTRproq6l2AjD1IyZ4QP73qIKFou40iQssZuh4nSNcJwt2Kfrqr9fk8SiVGVMdTVdxsgl5dAkIXWN4KFGOBtYcnNnzmN8fQkFkguBISJabsCAJOBNgaSFexm_LGQOoGYSnNWprjTJmeEZZRXLHsEeA7gJHryBK7RZHeXLnNcmiSS2txNNfPQHtu0AHEKLWKJSy0e_3l0F1FL2BtzFLo-WaJYKWPxD-qJCq4Ut9lrjB-sFa_8At4gDpToH5wB0oHDwNQzp8Dl_YOGNcUij4Q8YTinSgQH-8oNIemfVkCmbDfsGWpkonUhZoVk6HEOR1xIiYYTnbMS04V7zMzMX0CwhW7hz991DBqUa4hNMZqChTKO1tZBrI0MoH0CD7P5xRCxBjUf4WuPQLUITALp3zBhbvYge-rbUtFx4LtZfZtPz_3ZQ_xbw"
 }

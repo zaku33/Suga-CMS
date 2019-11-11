@@ -1,15 +1,13 @@
 <template>
-<v-app>
-  <div id="app">
+<div id="app">
+  <v-app>
     <body>
-      <v-responsive :aspect-ratio="16/9" >
-        <!-- <v-card-text> -->
-        <router-view></router-view>
-        <!-- </v-card-text> -->
+      <v-responsive :aspect-ratio="16/9">
+        <router-view />
       </v-responsive>
     </body>
-  </div>
-</v-app>
+  </v-app>
+</div>
 <!-- </v-app> -->
 </template>
 <style>

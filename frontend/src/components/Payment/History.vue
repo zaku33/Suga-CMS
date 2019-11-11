@@ -15,7 +15,7 @@
       <v-avatar>
         <img src="../../assets/payment/Close.png" alt="John" />
       </v-avatar>
-    </v-btn> -->
+    </v-btn>-->
     <v-row style="max-height: fit-content;">
       <v-col cols="5" sm="5" md="5">
         <img src="../../assets/payment/Line.png" style="width:100%" />
@@ -42,21 +42,29 @@
         class="elevation-1"
         :mobile-breakpoint="0"
       >
+        <!-- fixed-header -->
+        <!-- <v-layout column style="height: 10vh">
+        <v-flex md6 style="overflow: auto">-->
         <template v-slot:body="{ items }">
-          <tbody style="overflow: auto">
+          <tbody>
             <tr v-for="item in items" :key="item.id">
               <td>{{item.date!=null ? moment(item.date).format("YYYY-MM-DD HH:mm:ss A") : null}}</td>
               <td>{{item.transactionId || null}}</td>
               <td>{{item.amount!=null ? Number(item.amount.toFixed(1)).toLocaleString(): null}} {{item.currency || "VND"}}</td>
               <td>{{item.chips || null}}</td>
               <td>
-                <img src="../../assets/history/Viettel.png" id="CardIcon" />
+                <img
+                  :src="item.serviceName!=undefined ? require('../../assets/history/'+ item.serviceName +'.png') : null"
+                  id="CardIcon"
+                />
                 {{item.serviceName || null}}
               </td>
               <td>{{item.status || null}}</td>
             </tr>
           </tbody>
         </template>
+        <!-- </v-flex>
+        </v-layout>-->
       </v-data-table>
       <div class="text-center pt-2">
         <v-pagination v-model="page" :length="pageCount" :total-visible="totalVisiblePagination"></v-pagination>
@@ -67,7 +75,7 @@
 <script>
 import moment from "moment";
 import axios from "axios";
-import { token, imgDefine , history_data } from "../../define/data";
+import { token, imgDefine, history_data } from "../../define/data";
 import { GetHistory, PaymentAPI } from "../../controller/payment";
 export default {
   data() {
@@ -75,44 +83,50 @@ export default {
       moment: moment,
       page: 1,
       pageCount: 0,
-      itemsPerPage: 6,
+      itemsPerPage: 20,
       totalVisiblePagination: 7,
       headers: [
         {
           text: "THỜI ĐIỂM GIAO DỊCH",
           align: "left",
           sortable: false,
-          value: "date"
+          value: "date",
+          fixed: true
         },
         {
           text: "MÃ GIAO DỊCH",
           align: "left",
           sortable: false,
-          value: "transactionId"
+          value: "transactionId",
+          fixed: true
         },
         {
           text: "GÓI NẠP",
           align: "left",
           sortable: false,
-          value: "amount"
+          value: "amount",
+          fixed: true
         },
         {
           text: "MỆNH GIÁ",
           align: "left",
           sortable: false,
-          value: "carbs"
+          value: "carbs",
+          fixed: true
         },
         {
           text: "PHƯƠNG THỨC THANH TOÁN",
           align: "left",
           sortable: false,
-          value: "serviceName"
+          value: "serviceName",
+          fixed: true
         },
         {
           text: "TRẠNG THÁI",
           align: "left",
           sortable: false,
-          value: "status"
+          value: "status",
+          fixed: true
         }
       ],
       dataBody: [],
@@ -145,8 +159,8 @@ export default {
   padding-bottom: 2px;
 }
 div#tableRow {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 table thead tr th,
 table tbody tr td {
@@ -158,7 +172,7 @@ table {
   border-top: 2px solid red;
   border-right: 2px solid red;
 }
-thead.v-data-table-header {
+thead tr {
   background-image: url("../../assets/payment/TableBG.png");
   background-size: auto;
   background-repeat: repeat;

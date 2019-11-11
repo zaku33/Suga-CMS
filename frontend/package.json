@@ -16,6 +16,7 @@
     "lodash": "^4.17.15",
     "mdbvue": "^6.0.0",
     "moment": "^2.24.0",
+    "stylus-loader": "^3.0.2",
     "sweetalert2": "^8.18.6",
     "vue": "^2.6.10",
     "vue-captcha": "^1.0.2",
