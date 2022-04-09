@@ -15,7 +15,7 @@
     "element-ui": "^2.12.0",
     "lodash": "^4.17.15",
     "mdbvue": "^6.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "stylus-loader": "^3.0.2",
     "sweetalert2": "^8.18.6",
     "vue": "^2.6.10",
